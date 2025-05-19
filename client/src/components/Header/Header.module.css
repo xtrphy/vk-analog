@@ -35,7 +35,19 @@
     cursor: pointer;
 }
 
-.avatar {
-    width: 32px;
-    border-radius: 50%;
+.headerInput {
+    border: none;
+    padding: 0.40rem;
+    border-radius: 10px;
+    background-color: #424242;
+    color: white;
+}
+
+.headerInput:focus {
+    border: 1px solid white;
+}
+
+.headerInput::placeholder {
+    padding: 0 0 0 1rem;
+    font-size: 0.9rem;
 }

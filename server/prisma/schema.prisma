@@ -15,10 +15,9 @@ datasource db {
 
 model User {
     id             String    @id @default(cuid())
-    email          String    @unique
+    githubId       String?   @unique
     username       String    @unique
-    name           String?
-    bio            String?
+    email          String?   @unique
     profilePicture String?
     passwordHash   String?
     createdAt      DateTime  @default(now())

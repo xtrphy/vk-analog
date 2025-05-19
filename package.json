@@ -1,0 +1,21 @@
+{
+    "name": "vk-analog",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "client": "npm run dev --prefix client",
+        "server": "npm run dev --prefix server",
+        "dev": "concurrently \"npm run server\" \"npm run client\""
+    },
+    "prisma": {
+        "seed": "node prisma/seed.js"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "devDependencies": {
+        "concurrently": "^9.1.2",
+        "nodemon": "^3.1.10"
+    }
+}

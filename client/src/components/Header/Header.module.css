@@ -1,0 +1,41 @@
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    padding: 0 25rem;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #222222;
+    height: 48px;
+}
+
+.container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    cursor: pointer;
+}
+
+.vkLogo {
+    width: 25px;
+}
+
+.logoTitle {
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.avatar {
+    width: 32px;
+    border-radius: 50%;
+}

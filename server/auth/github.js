@@ -31,6 +31,7 @@ passport.use(new GitHubStrategy({
                         username: profile.username,
                         email: profile.emails?.[0]?.value || null,
                         profilePicture: profile.photos?.[0]?.value || null,
+                        bio: profile.bio,
                     },
                 });
             }

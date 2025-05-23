@@ -1,11 +1,38 @@
 import React from 'react';
+import { useUser } from '../../contexts/UserContext';
+import { Link } from 'react-router-dom';
 import styles from './Profile.module.css';
+import Header from '../../components/Header/Header';
+import SideBar from '../../components/SideBar/SideBar';
+import Container from '../../components/Container/Container';
+
+import { avatarPlaceholder } from '../../utils/constants';
 
 const Profile = () => {
+    const { profile, setProfile } = useUser();
+
     return (
-        <div>
-            <h1 className={styles.profilePage}>TODO: Create profile page</h1>
-        </div>
+        <>
+            <Header />
+            <SideBar />
+            <Container>
+                <div className={styles.profileContainer}>
+                    <img src={profile.profilePicture ? profile.profilePicture : avatarPlaceholder} className={styles.profilePicture} alt={profile.username} />
+
+                    <div className={styles.bioContainer}>
+                        <div className={styles.editProfileContainer}>
+                            <h2 className={styles.profileUsername}>{profile.username}</h2>
+                            <Link to='/edit' className={styles.editProfileBtn}>
+                                Редактировать профиль
+                            </Link>
+                        </div>
+                        <span className={styles.profileBio}>{profile.bio}</span>
+                    </div>
+
+
+                </div>
+            </Container>
+        </>
     );
 };
 

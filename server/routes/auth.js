@@ -15,10 +15,6 @@ router.use(session({
 router.use(passport.initialize());
 router.use(passport.session());
 
-router.get('/', (req, res) => {
-    res.send(`<a href="/auth/github">Login with GitHub</a>`);
-});
-
 router.get('/auth/github',
     passport.authenticate('github', { scope: ['user:email'] })
 );

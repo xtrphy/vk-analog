@@ -5,7 +5,9 @@
 
 .avatar {
     width: 32px;
-    border-radius: 50%;
+        aspect-ratio: 1 / 1;
+        object-fit: cover;
+        border-radius: 50%;
     cursor: pointer;
 }
 

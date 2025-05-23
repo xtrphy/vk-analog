@@ -4,6 +4,8 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useUser } from '../../contexts/UserContext';
 import styles from './DropdownMenu.module.css';
 
+import { avatarPlaceholder } from '../../utils/constants';
+
 const DropdownMenu = () => {
     const { profile, setProfile } = useUser();
     const navigate = useNavigate();
@@ -36,7 +38,7 @@ const DropdownMenu = () => {
     return (
         <div className={styles.dropdown} ref={menuRef}>
             <img
-                src={profile.profilePicture}
+                src={profile.profilePicture ? profile.profilePicture : avatarPlaceholder}
                 alt={profile.username}
                 className={styles.avatar}
                 onClick={() => setOpen((prev) => !prev)}

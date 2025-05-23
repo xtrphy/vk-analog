@@ -1,0 +1,46 @@
+.container {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+}
+
+.container h1 {
+    font-size: 2rem;
+    color: white;
+}
+
+.vkLogo {
+    width: 4rem;
+    transition: transform 1s ease;
+}
+
+.vkLogo:hover {
+    transform: scale(1.2);
+}
+
+.logInBtn {
+    margin-top: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: none;
+    background-color: #000;
+    padding: 0.925rem 1rem;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+.logInBtn:hover {
+    background-color: #fff;
+    color: black;
+}
+
+.githubIcon {
+    font-size: 1.25rem;
+}

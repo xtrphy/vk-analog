@@ -1,9 +1,12 @@
 import React from 'react';
 import { useState, useRef, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useUser } from '../../contexts/UserContext';
 import styles from './DropdownMenu.module.css';
 
-const DropdownMenu = ({ profile }) => {
+const DropdownMenu = () => {
+    const { profile, setProfile } = useUser();
+    const navigate = useNavigate();
     const [open, setOpen] = useState(false);
     const menuRef = useRef();
 
@@ -17,6 +20,19 @@ const DropdownMenu = ({ profile }) => {
         return () => document.removeEventListener('mousedown', handler);
     }, []);
 
+    const handleLogout = async () => {
+        setOpen(false);
+        const response = await fetch('http://localhost:3000/logout', {
+            method: 'GET',
+            credentials: 'include'
+        });
+
+        if (response.ok) {
+            setProfile(null);
+            navigate('/');
+        }
+    };
+
     return (
         <div className={styles.dropdown} ref={menuRef}>
             <img
@@ -26,12 +42,9 @@ const DropdownMenu = ({ profile }) => {
                 onClick={() => setOpen((prev) => !prev)}
             />
             <div className={`${styles.menu} ${open ? styles.open : ''}`}>
-                <button className={styles.item}>
-                    <Link to='/profile' className={styles.profileLink}>Профиль</Link>
-                </button>
-                <button className={styles.item} onClick={() => alert('Выход')}>
-                    <Link to='/' className={styles.exitLink}>Выход</Link>
-                    {/* TODO: handle click on exit button */}
+                <Link to='/profile' className={styles.item}>Профиль</Link>
+                <button className={styles.item} onClick={handleLogout}>
+                    Выход
                 </button>
             </div>
         </div>

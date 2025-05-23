@@ -26,8 +26,9 @@ router.get('/auth/github',
 router.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => {
-        res.redirect('/profile');
-    });
+        res.redirect('http://localhost:5173/feed');
+    }
+);
 
 router.get('/logout', (req, res) => {
     req.logout(() => res.redirect('/'));

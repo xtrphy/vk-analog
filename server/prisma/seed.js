@@ -1,8 +1,6 @@
 const prisma = require('./client');
 const { faker } = require('@faker-js/faker');
 
-console.log('Seed script started');
-
 async function main() {
     await prisma.comment.deleteMany();
     await prisma.like.deleteMany();
@@ -34,8 +32,6 @@ async function main() {
             });
         }
     }
-
-    console.log('Seed completed');
 }
 
 main()

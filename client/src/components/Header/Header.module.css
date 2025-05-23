@@ -35,19 +35,36 @@
     cursor: pointer;
 }
 
+.searchContainer {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+}
+
+.searchIcon {
+    position: absolute;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    color: #777;
+}
+
 .headerInput {
     border: none;
     padding: 0.40rem;
+    font-weight: 300;
+    padding-left: 2rem;
     border-radius: 10px;
     background-color: #424242;
     color: white;
 }
 
-.headerInput:focus {
-    border: 1px solid white;
+.headerInput:hover {
+    background-color: #494949;
 }
 
 .headerInput::placeholder {
-    padding: 0 0 0 1rem;
     font-size: 0.9rem;
 }

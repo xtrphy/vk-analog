@@ -1,6 +1,8 @@
 import React from 'react';
 import styles from './Header.module.css'
 import DropdownMenu from '../DropdownMenu/DropdownMenu';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
 const Header = () => {
     return (
         <header className={styles.header}>
@@ -11,7 +13,10 @@ const Header = () => {
                         ВКоннекте
                     </h2>
                 </div>
-                <input className={styles.headerInput} type="text" placeholder='Поиск' />
+                <div className={styles.searchContainer}>
+                    <FontAwesomeIcon icon={faMagnifyingGlass} className={styles.searchIcon} />
+                    <input className={styles.headerInput} type="text" placeholder='Поиск' />
+                </div>
                 <DropdownMenu />
             </div>
         </header>

@@ -1,13 +1,11 @@
 import React from 'react';
 import styles from './Feed.module.css';
-import { useUser } from '../../contexts/UserContext';
+import SideBar from '../../components/SideBar/SideBar';
 
 const Feed = () => {
-    const { profile } = useUser();
-
     return (
         <div className={styles.feedContainer}>
-            <h1 style={{ color: 'white' }}>{profile.username}</h1>
+            <SideBar />
         </div>
     );
 };

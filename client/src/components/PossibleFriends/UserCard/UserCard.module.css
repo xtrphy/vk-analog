@@ -1,0 +1,34 @@
+.userCard {
+    position: relative;
+    width: 94px;
+    height: 167px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.profilePicture {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
+}
+
+.cardGradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 110px;
+    background: linear-gradient(to top, rgba(40, 40, 40, 1), transparent);
+}
+
+.username {
+    position: absolute;
+    top: 140px;
+    color: #69aefd;
+    font-size: 0.8rem;
+}

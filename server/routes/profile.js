@@ -3,7 +3,7 @@ const router = express.Router();
 const prisma = require('../prisma/client');
 
 router.get('/', async (req, res) => {
-    if (!req.isAuthenticated()) return res.status(401).json({ error: 'Not authenticated' });
+    if (!req.isAuthenticated()) return;
     res.json(req.user);
 });
 

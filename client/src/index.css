@@ -116,10 +116,10 @@ legend {
 body {
     font-family: 'Inter', 'Roboto', sans-serif;
     background-color: #141414;
+    color: white;
 }
 
 #root {
     padding: 0 25rem;
     display: flex;
-    justify-content: center;
 }

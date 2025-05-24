@@ -13,7 +13,6 @@ async function main() {
             data: {
                 email: faker.internet.email(),
                 username: faker.internet.username(),
-                name: faker.person.fullName(),
                 bio: faker.lorem.sentence(),
                 profilePicture: faker.image.avatar(),
             },

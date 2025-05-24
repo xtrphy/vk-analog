@@ -1,0 +1,40 @@
+.postsContainer {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 4rem;
+    margin-top: 0.8rem;
+    height: max-content;
+    background-color: #222222;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.noPostsContainer {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 0.8rem;
+    background-color: #222222;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.linkToFriends {
+    color: white;
+    background-color: #343331;
+    font-size: 0.8rem;
+    font-weight: 600;
+    height: min-content;
+    padding: 0.4rem 2rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.linkToFriends:hover {
+    background-color: #3f3c35;
+}

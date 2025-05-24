@@ -15,7 +15,7 @@ const Profile = () => {
         <>
             <Header />
             <SideBar />
-            <Container>
+            <div className={styles.container}>
                 <div className={styles.profileContainer}>
                     <img src={profile.profilePicture ? profile.profilePicture : avatarPlaceholder} className={styles.profilePicture} alt={profile.username} />
 
@@ -31,7 +31,7 @@ const Profile = () => {
 
 
                 </div>
-            </Container>
+            </div>
         </>
     );
 };

@@ -4,7 +4,6 @@ import { useState } from 'react';
 import styles from './EditProfile.module.css';
 import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
-import Container from '../../components/Container/Container';
 
 import { avatarPlaceholder } from '../../utils/constants';
 
@@ -43,7 +42,7 @@ const EditProfile = () => {
         <>
             <Header />
             <SideBar />
-            <Container>
+            <div className={styles.container}>
                 <div className={styles.editProfileContainer}>
                     <h1 className={styles.title}>Профиль</h1>
                     <div className={styles.profileInfo}>
@@ -90,7 +89,7 @@ const EditProfile = () => {
                         </button>
                     </form>
                 </div>
-            </Container>
+            </div>
         </>
     );
 };

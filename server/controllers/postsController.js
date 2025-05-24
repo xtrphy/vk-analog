@@ -39,6 +39,29 @@ const getFeedPosts = async (req, res) => {
                         profilePicture: true,
                     },
                 },
+                _count: {
+                    select: {
+                        likes: true,
+                        comments: true,
+                    },
+                },
+                comments: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
+                    take: 1,
+                    select: {
+                        content: true,
+                        createdAt: true,
+                        author: {
+                            select: {
+                                id: true,
+                                username: true,
+                                profilePicture: true,
+                            },
+                        },
+                    },
+                },
             },
             take: 30,
         });

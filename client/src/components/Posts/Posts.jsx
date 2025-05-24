@@ -22,7 +22,7 @@ const Posts = () => {
     return posts.length > 0 ? (
         <div className={styles.postsContainer}>
             {posts.map(post => (
-                <Post post={post} />
+                <Post key={post.id} post={post} />
             ))}
         </div>
     ) : (

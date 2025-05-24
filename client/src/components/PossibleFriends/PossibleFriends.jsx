@@ -20,7 +20,7 @@ const PossibleFriends = () => {
         <>
             <div className={styles.possibleFriendsContainer}>
                 {users.map(user => (
-                    <UserCard user={user} />
+                    <UserCard key={user.id} user={user} />
                 ))}
             </div>
         </>

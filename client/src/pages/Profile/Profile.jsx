@@ -6,11 +6,13 @@ import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
 import { avatarPlaceholder } from '../../utils/constants';
 import CreatePostBtn from '../../components/CreatePostBtn/CreatePostBtn';
+import ProfilePosts from '../../components/ProfilePosts/ProfilePosts';
 
 const Profile = () => {
     const { profile, setProfile } = useUser();
 
-    const posts = profile.posts
+    const posts = profile.posts;
+    console.log(posts);
 
     return (
         <>
@@ -33,6 +35,9 @@ const Profile = () => {
 
                 <div className={styles.profilePosts}>
                     <CreatePostBtn />
+
+                    <ProfilePosts posts={posts} profile={profile} />
+
                 </div>
 
             </div>

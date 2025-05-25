@@ -1,24 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import styles from './Post.module.css';
+import styles from './ProfilePost.module.css';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
-const Post = ({ post }) => {
-    const [user, setUser] = useState([]);
-
-    useEffect(() => {
-        fetch('http://localhost:3000/profile', {
-            method: 'GET',
-            credentials: 'include',
-        })
-            .then(res => res.json())
-            .then(data => setUser(data))
-            .catch(err => console.error(err))
-    }, []);
-
+const ProfilePost = ({ post, profile }) => {
+    console.log(profile);
+    console.log(post);
     const lastComment = post.comments?.[0];
 
     let formattedCommentTime = '';
@@ -38,9 +28,9 @@ const Post = ({ post }) => {
 
             <div className={styles.wrapper}>
                 <div className={styles.postAuthorContainer}>
-                    <Link to={`/user/${post.author.id}`} className={styles.postAuthor}>
-                        <img className={styles.profilePicture} src={post.author.profilePicture} alt={post.author.username} />
-                        <h2 className={styles.authorUsername}>{post.author.username}</h2>
+                    <Link to={`/user/${profile.id}`} className={styles.postAuthor}>
+                        <img className={styles.profilePicture} src={profile.profilePicture} alt={profile.username} />
+                        <h2 className={styles.authorUsername}>{profile.username}</h2>
                     </Link>
                     <button className={styles.subscribeBtn}>Подписаться</button>
                 </div>
@@ -52,10 +42,10 @@ const Post = ({ post }) => {
                 <div className={styles.postInteractions}>
                     <div className={styles.buttonsContainer}>
                         <button><FontAwesomeIcon icon={faHeart} />
-                            <span>{post._count.likes}</span>
+                            <span>{post.likes.length}</span>
                         </button>
                         <button><FontAwesomeIcon icon={faComment} />
-                            <span>{post._count.comments}</span>
+                            <span>{post.comments.length}</span>
                         </button>
                     </div>
                     <span className={styles.timeAgoPost}>{timeAgo}</span>
@@ -76,7 +66,7 @@ const Post = ({ post }) => {
                     </div>
 
                     <div className={styles.commentInputFieldContainer}>
-                        <img className={styles.userProfilePicture} src={user.profilePicture} alt={user.username} />
+                        <img className={styles.userProfilePicture} src={profile.profilePicture} alt={profile.username} />
                         <input
                             className={styles.commentInput}
                             type="text"
@@ -95,4 +85,4 @@ const Post = ({ post }) => {
     );
 };
 
-export default Post;
+export default ProfilePost;

@@ -5,15 +5,20 @@
     gap: 1rem;
 }
 
-.postAuthor {
+.postAuthorContainer {
     display: flex;
     justify-content: space-between;
 }
 
-.postAuthor div {
+.postAuthor {
+    color: white;
     display: flex;
     align-items: center;
     gap: 0.6rem;
+}
+
+.postAuthor:hover {
+    text-decoration: underline;
 }
 
 .profilePicture {

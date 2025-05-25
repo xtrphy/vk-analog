@@ -1,15 +1,15 @@
 import React from 'react';
+import styles from './Profile.module.css';
 import { useUser } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
-import styles from './Profile.module.css';
 import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
-import Container from '../../components/Container/Container';
 
 import { avatarPlaceholder } from '../../utils/constants';
 
 const Profile = () => {
     const { profile, setProfile } = useUser();
+
 
     return (
         <>

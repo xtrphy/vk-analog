@@ -10,7 +10,7 @@ const Header = () => {
         <header className={styles.header}>
             <div className={styles.container}>
                 <Link to='/' className={styles.logo}>
-                    <img className={styles.vkLogo} src="vk.png" alt="ВКоннекте" />
+                    <img className={styles.vkLogo} src="/vk.png" alt="ВКоннекте" />
                     <h2 className={styles.logoTitle}>
                         ВКоннекте
                     </h2>

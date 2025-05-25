@@ -18,7 +18,7 @@ const Feed = () => {
                 <PossibleFriends />
 
                 <button className={styles.createPostBtn}>
-                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1.125rem'}} />
+                    <FontAwesomeIcon icon={faPlus} style={{ fontSize: '1.125rem' }} />
                     <span className={styles.createPost}>Создать пост</span>
                 </button>
 

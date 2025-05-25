@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import styles from './Post.module.css';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
@@ -35,11 +36,11 @@ const Post = ({ post }) => {
         <div className={styles.post}>
 
             <div className={styles.wrapper}>
-                <div className={styles.postAuthor}>
-                    <div>
+                <div className={styles.postAuthorContainer}>
+                    <Link to={`/user/${post.author.id}`} className={styles.postAuthor}>
                         <img className={styles.profilePicture} src={post.author.profilePicture} alt={post.author.username} />
                         <h2 className={styles.authorUsername}>{post.author.username}</h2>
-                    </div>
+                    </Link>
                     <button className={styles.subscribeBtn}>Подписаться</button>
                 </div>
 

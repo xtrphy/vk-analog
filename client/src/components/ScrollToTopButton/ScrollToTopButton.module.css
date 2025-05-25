@@ -1,0 +1,21 @@
+.scrollToTopBtn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 8px;
+    background-color: #333;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+    transition: background-color 0.2s ease;
+}
+
+.scrollToTopBtn:hover {
+    background-color: #141414;
+}

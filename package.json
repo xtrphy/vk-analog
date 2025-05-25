@@ -14,5 +14,8 @@
     "devDependencies": {
         "concurrently": "^9.1.2",
         "nodemon": "^3.1.10"
+    },
+    "dependencies": {
+        "date-fns": "^4.1.0"
     }
 }

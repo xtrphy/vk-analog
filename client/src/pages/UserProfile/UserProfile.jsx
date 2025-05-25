@@ -33,7 +33,7 @@ const UserProfile = () => {
                         <div className={styles.editProfileContainer}>
                             <h2 className={styles.profileUsername}>{user.username}</h2>
                             <button className={styles.editProfileBtn}>
-                                Добавить в друзья
+                                Подписаться
                             </button>
                         </div>
                         <span className={styles.profileBio}>{user.bio}</span>

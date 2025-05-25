@@ -4,7 +4,27 @@ const prisma = require('../prisma/client');
 
 router.get('/', async (req, res) => {
     if (!req.isAuthenticated()) return;
-    res.json(req.user);
+
+    const userId = req.user.id;
+
+    const user = await prisma.user.findUnique({
+        where: { id: userId },
+        include: {
+            posts: true,
+            followers: {
+                include: {
+                    follower: true,
+                },
+            },
+            following: {
+                include: {
+                    followee: true,
+                },
+            },
+        },
+    });
+
+    res.json(user);
 });
 
 router.patch('/edit', async (req, res) => {

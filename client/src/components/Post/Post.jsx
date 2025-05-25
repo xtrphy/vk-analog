@@ -87,7 +87,7 @@ const Post = ({ post }) => {
                     </div>
                 </>
             ) : (
-                ''
+                null
             )}
 
         </div>

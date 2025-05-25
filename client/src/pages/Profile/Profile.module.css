@@ -1,4 +1,7 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
     width: 1200px;
     margin-top: 4rem;
 }
@@ -62,4 +65,11 @@
 
 .editProfileBtn:hover {
     background-color: #444;
+}
+
+.profilePosts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 550px;
 }

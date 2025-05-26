@@ -5,9 +5,11 @@ import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { useUser } from '../../contexts/UserContext';
 
 const Post = ({ post }) => {
     const [user, setUser] = useState([]);
+    const { profile } = useUser();
 
     useEffect(() => {
         fetch('http://localhost:3000/profile', {
@@ -42,7 +44,11 @@ const Post = ({ post }) => {
                         <img className={styles.profilePicture} src={post.author.profilePicture} alt={post.author.username} />
                         <h2 className={styles.authorUsername}>{post.author.username}</h2>
                     </Link>
-                    <button className={styles.subscribeBtn}>Подписаться</button>
+                    {post.author.username === profile.username ? (
+                        null
+                    ) : (
+                        <button className={styles.subscribeBtn}>Подписаться</button>
+                    )}
                 </div>
 
                 <div className={styles.postContentContainer}>

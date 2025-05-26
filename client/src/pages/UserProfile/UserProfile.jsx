@@ -1,25 +1,32 @@
 import React from 'react';
 import styles from './UserProfile.module.css';
 import { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
 
 import { avatarPlaceholder } from '../../utils/constants';
+import { useUser } from '../../contexts/UserContext';
 
 const UserProfile = () => {
+    const { profile } = useUser();
+    const navigate = useNavigate();
     const { id } = useParams();
     const [user, setUser] = useState([]);
 
     useEffect(() => {
-        fetch(`http://localhost:3000/user/${id}`, {
-            method: 'GET',
-            credentials: 'include',
-        })
-            .then(res => res.json())
-            .then(data => setUser(data))
-            .catch(err => console.err(err));
-    }, [id]);
+        if (id === profile.id) {
+            navigate('/profile');
+        } else {
+            fetch(`http://localhost:3000/user/${id}`, {
+                method: 'GET',
+                credentials: 'include',
+            })
+                .then(res => res.json())
+                .then(data => setUser(data))
+                .catch(err => console.err(err));
+        }
+    }, [id, navigate, profile.id]);
 
     return (
         <>

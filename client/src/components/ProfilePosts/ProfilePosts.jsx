@@ -11,8 +11,7 @@ const ProfilePosts = ({ posts, profile }) => {
         </div>
     ) : (
         <div className={styles.noPostsContainer}>
-            <h1>Подпишитесь на авторов, чтобы видеть их посты!</h1>
-            <Link className={styles.linkToFriends} to='/friends'>Авторы</Link>
+            <h1>У вас ещё нет постов.</h1>
         </div>
     );
 };

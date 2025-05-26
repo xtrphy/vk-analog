@@ -7,8 +7,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
 const ProfilePost = ({ post, profile }) => {
-    console.log(profile);
-    console.log(post);
     const lastComment = post.comments?.[0];
 
     let formattedCommentTime = '';
@@ -32,7 +30,6 @@ const ProfilePost = ({ post, profile }) => {
                         <img className={styles.profilePicture} src={profile.profilePicture} alt={profile.username} />
                         <h2 className={styles.authorUsername}>{profile.username}</h2>
                     </Link>
-                    <button className={styles.subscribeBtn}>Подписаться</button>
                 </div>
 
                 <div className={styles.postContentContainer}>

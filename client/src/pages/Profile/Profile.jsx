@@ -12,7 +12,6 @@ const Profile = () => {
     const { profile, setProfile } = useUser();
 
     const posts = profile.posts;
-    console.log(posts);
 
     return (
         <>

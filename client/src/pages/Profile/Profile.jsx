@@ -47,7 +47,7 @@ const Profile = () => {
                             {subscriptions.length > 0 ? (
                                 <ul className={styles.followingList}>
                                     {subscriptions.map(subscription => (
-                                        <li className={styles.listItem}>
+                                        <li key={subscription.id} className={styles.listItem}>
                                             <Link to={`/user/${subscription.followee.id}`} className={styles.followee}>
                                                 <img className={styles.followeeAvatar} src={subscription.followee.profilePicture} alt={subscription.followee.username} />
                                                 <span className={styles.followeeUsername}>{truncate(subscription.followee.username, 8)}</span>

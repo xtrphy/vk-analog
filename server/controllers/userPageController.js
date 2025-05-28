@@ -12,10 +12,25 @@ const getUserProfile = async (req, res) => {
                 profilePicture: true,
                 bio: true,
                 followers: {
-                    select: { id: true },
+                    select: {
+                        follower: {
+                            select: {
+                                username: true,
+                                profilePicture: true
+                            }
+                        }
+                    },
                 },
                 following: {
-                    select: { id: true },
+                    select: {
+                        followee: {
+                            select: {
+                                id: true,
+                                username: true,
+                                profilePicture: true,
+                            }
+                        }
+                    },
                 },
                 posts: {
                     orderBy: { createdAt: 'desc' },

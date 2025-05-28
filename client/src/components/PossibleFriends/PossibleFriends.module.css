@@ -1,5 +1,6 @@
 .possibleFriendsContainer {
-    width: min-content;
+    width: 550px;
     display: flex;
+    justify-content: flex-start;
     gap: 0.7rem;
 }

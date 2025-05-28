@@ -7,10 +7,11 @@ import SideBar from '../../components/SideBar/SideBar';
 import { avatarPlaceholder } from '../../utils/constants';
 import CreatePostBtn from '../../components/CreatePostBtn/CreatePostBtn';
 import ProfilePosts from '../../components/ProfilePosts/ProfilePosts';
+import { truncate } from '../../utils/constants';
 
 const Profile = () => {
     const { profile, setProfile } = useUser();
-
+    const subscriptions = profile.following.slice(0, 4);
     const posts = profile.posts;
 
     return (
@@ -32,10 +33,33 @@ const Profile = () => {
                     </div>
                 </div>
 
-                <div className={styles.profilePosts}>
-                    <CreatePostBtn />
+                <div className={styles.horizontalContainer}>
+                    <div className={styles.profilePosts}>
+                        <CreatePostBtn />
 
-                    <ProfilePosts posts={posts} profile={profile} />
+                        <ProfilePosts posts={posts} profile={profile} />
+
+                    </div>
+
+                    <div className={styles.subscriptionsContainer}>
+                        <h2 className={styles.subscriptionsTitle}>Подписки <span className={styles.subscriptionsQuantity}>{subscriptions.length}</span></h2>
+                        <div className={styles.subscriptions}>
+                            {subscriptions.length > 0 ? (
+                                <ul className={styles.followingList}>
+                                    {subscriptions.map(subscription => (
+                                        <li className={styles.listItem}>
+                                            <Link to={`/user/${subscription.followee.id}`} className={styles.followee}>
+                                                <img className={styles.followeeAvatar} src={subscription.followee.profilePicture} alt={subscription.followee.username} />
+                                                <span className={styles.followeeUsername}>{truncate(subscription.followee.username, 8)}</span>
+                                            </Link>
+                                        </li>
+                                    ))}
+                                </ul>
+                            ) : (
+                                null
+                            )}
+                        </div>
+                    </div>
 
                 </div>
 

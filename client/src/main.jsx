@@ -9,6 +9,7 @@ import LogIn from './pages/LogIn/LogIn.jsx';
 import Profile from './pages/Profile/Profile.jsx';
 import EditProfile from './pages/EditProfile/EditProfile.jsx';
 import UserProfile from './pages/UserProfile/UserProfile.jsx';
+import Friends from './pages/Friends/Friends.jsx';
 
 const router = createBrowserRouter([
     {
@@ -44,6 +45,14 @@ const router = createBrowserRouter([
         element: (
             <PrivateRoute>
                 <UserProfile />
+            </PrivateRoute>
+        )
+    },
+    {
+        path: '/friends',
+        element: (
+            <PrivateRoute>
+                <Friends />
             </PrivateRoute>
         )
     }

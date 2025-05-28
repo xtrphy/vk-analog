@@ -23,6 +23,19 @@ const getUserProfile = async (req, res) => {
                         id: true,
                         content: true,
                         createdAt: true,
+                        _count: {
+                            select: {
+                                likes: true,
+                                comments: true,
+                            }
+                        },
+                        comments: {
+                            select: {
+                                author: true,
+                                content: true,
+                                createdAt: true,
+                            }
+                        },
                     },
                 },
             },

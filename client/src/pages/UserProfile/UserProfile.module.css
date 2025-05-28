@@ -1,4 +1,7 @@
 .container {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
     width: 1200px;
     margin-top: 4rem;
 }
@@ -62,4 +65,38 @@
 
 .editProfileBtn:hover {
     background-color: #444;
+}
+
+.profilePosts {
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    width: 550px;
+}
+
+.posts {
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+    background-color: #222;
+    padding: 1rem;
+}
+
+.post {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.postAuthor {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+.authorProfilePicture {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    object-fit: cover;
+    aspect-ratio: 1 / 1;
 }

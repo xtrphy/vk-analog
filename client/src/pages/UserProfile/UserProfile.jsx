@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
+import UserProfilePosts from './UserProfilePosts/UserProfilePosts';
 
 import { avatarPlaceholder } from '../../utils/constants';
 import { useUser } from '../../contexts/UserContext';
@@ -13,6 +14,7 @@ const UserProfile = () => {
     const navigate = useNavigate();
     const { id } = useParams();
     const [user, setUser] = useState([]);
+    const [posts, setPosts] = useState([]);
 
     useEffect(() => {
         if (id === profile.id) {
@@ -23,7 +25,10 @@ const UserProfile = () => {
                 credentials: 'include',
             })
                 .then(res => res.json())
-                .then(data => setUser(data))
+                .then(data => {
+                    setUser(data);
+                    setPosts(data.posts);
+                })
                 .catch(err => console.err(err));
         }
     }, [id, navigate, profile.id]);
@@ -33,6 +38,7 @@ const UserProfile = () => {
             <Header />
             <SideBar />
             <div className={styles.container}>
+
                 <div className={styles.profileContainer}>
                     <img src={user.profilePicture ? user.profilePicture : avatarPlaceholder} className={styles.profilePicture} alt={user.username} />
 
@@ -45,8 +51,9 @@ const UserProfile = () => {
                         </div>
                         <span className={styles.profileBio}>{user.bio}</span>
                     </div>
-
-
+                </div>
+                <div className={styles.profilePosts}>
+                    <UserProfilePosts posts={posts} user={user} />
                 </div>
             </div>
         </>

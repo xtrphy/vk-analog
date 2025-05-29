@@ -65,14 +65,7 @@ model Follow {
     followerId String
     followee   User         @relation("Followee", fields: [followeeId], references: [id])
     followeeId String
-    status     FollowStatus @default(PENDING)
     createdAt  DateTime     @default(now())
 
     @@unique([followerId, followeeId])
-}
-
-enum FollowStatus {
-    PENDING
-    ACCEPTED
-    REJECTED
 }

@@ -8,9 +8,6 @@ const getFeedPosts = async (req, res) => {
             where: { id: userId },
             include: {
                 following: {
-                    where: {
-                        status: 'ACCEPTED',
-                    },
                     select: {
                         followee: {
                             select: { id: true },

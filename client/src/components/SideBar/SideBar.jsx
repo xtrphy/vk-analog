@@ -20,7 +20,7 @@ const SideBar = () => {
 
                 <Link className={styles.asideLink} to='/friends'>
                     <FontAwesomeIcon icon={faUserGroup} style={{ color: '#71aaeb' }} />
-                    Друзья
+                    Авторы
                 </Link>
             </ul>
         </aside>

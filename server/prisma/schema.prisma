@@ -60,12 +60,12 @@ model Like {
 }
 
 model Follow {
-    id         String       @id @default(cuid())
-    follower   User         @relation("Follower", fields: [followerId], references: [id])
+    id         String   @id @default(cuid())
+    follower   User     @relation("Follower", fields: [followerId], references: [id])
     followerId String
-    followee   User         @relation("Followee", fields: [followeeId], references: [id])
+    followee   User     @relation("Followee", fields: [followeeId], references: [id])
     followeeId String
-    createdAt  DateTime     @default(now())
+    createdAt  DateTime @default(now())
 
-    @@unique([followerId, followeeId])
+    @@unique([followerId, followeeId], name: "followerId_followeeId")
 }

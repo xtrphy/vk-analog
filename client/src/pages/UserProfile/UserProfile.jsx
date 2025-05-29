@@ -5,6 +5,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import SideBar from '../../components/SideBar/SideBar';
 import UserProfilePosts from './UserProfilePosts/UserProfilePosts';
+import SubscribeButton from '../../components/SubcribeButton/SubscribeButton';
 import { truncate } from '../../utils/constants';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +13,7 @@ import { avatarPlaceholder } from '../../utils/constants';
 import { useUser } from '../../contexts/UserContext';
 
 const UserProfile = () => {
-    const { profile } = useUser();
+    const { profile, setProfile } = useUser();
     const navigate = useNavigate();
     const { id } = useParams();
     const [user, setUser] = useState([]);
@@ -50,9 +51,9 @@ const UserProfile = () => {
                     <div className={styles.bioContainer}>
                         <div className={styles.editProfileContainer}>
                             <h2 className={styles.profileUsername}>{user.username}</h2>
-                            <button className={styles.editProfileBtn}>
-                                Подписаться
-                            </button>
+                            {user.id && (
+                                <SubscribeButton currentUser={profile} setCurrentUser={setProfile} targetUserId={user.id} />
+                            )}
                         </div>
                         <span className={styles.profileBio}>{user.bio}</span>
                     </div>

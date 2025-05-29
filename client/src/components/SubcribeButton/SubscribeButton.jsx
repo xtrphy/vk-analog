@@ -1,41 +1,61 @@
 import React from 'react';
 import styles from './SubscribeButton.module.css';
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
-const SubscribeButton = ({ currentUser, setCurrentUser, targetUserId }) => {
-    const [followingList, setFollowingList] = useState([]);
+const SubscribeButton = ({ className = '', currentUser, setCurrentUser, targetUserId }) => {
+    const [isFollowing, setIsFollowing] = useState(false);
 
     useEffect(() => {
-        setFollowingList(currentUser.following);
-    }, [currentUser]);
-
-    const isFollowing = followingList.some(f => f.followee.id === targetUserId);
+        if (currentUser?.following && targetUserId) {
+            const following = currentUser.following.some(f => f.followee.id === targetUserId);
+            setIsFollowing(following);
+        }
+    }, [currentUser?.following, targetUserId]);
 
     const handleFollowToggle = async () => {
-        const res = await fetch('http://localhost:3000/subscribe', {
-            method: 'POST',
-            credentials: 'include',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({ targetUserId }),
-        });
+        try {
+            const res = await fetch('http://localhost:3000/subscribe', {
+                method: 'POST',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ targetUserId }),
+            });
 
-        if (!res.ok) throw new Error('Error subscribing');
-        const data = await res.json();
+            if (!res.ok) throw new Error('Error subscribing');
 
-        if (data.message === 'Subscribed') {
-            setFollowingList(prev => [...prev, data.followee]);
-        } else if (data.message === 'Unsubscribed') {
-            setFollowingList(prev =>
-                prev.filter(user => user.id !== data.followee.id)
-            );
+            const data = await res.json();
+
+            if (data.message === 'Subscribed') {
+                const newFollowing = {
+                    followee: data.followee
+                };
+
+                setCurrentUser(prev => ({
+                    ...prev,
+                    following: [...(prev.following || []), newFollowing]
+                }));
+
+                setIsFollowing(true);
+            } else if (data.message === 'Unsubscribed') {
+                setCurrentUser(prev => ({
+                    ...prev,
+                    following: prev.following.filter(f => f.followee.id !== targetUserId)
+                }));
+
+                setIsFollowing(false);
+            }
+        } catch (err) {
+            console.error(err);
         }
     };
 
     return (
-        <button className={styles.subscribeBtn} onClick={handleFollowToggle}>
+        <button
+            className={`${styles.subscribeBtn} ${className}`}
+            onClick={handleFollowToggle}
+        >
             {isFollowing ? 'Отписаться' : 'Подписаться'}
         </button>
     );

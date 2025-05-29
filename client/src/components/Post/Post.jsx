@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Post.module.css';
+import SubscribeButton from '../SubcribeButton/SubscribeButton';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -9,7 +10,7 @@ import { useUser } from '../../contexts/UserContext';
 
 const Post = ({ post }) => {
     const [user, setUser] = useState([]);
-    const { profile } = useUser();
+    const { profile, setProfile } = useUser();
 
     useEffect(() => {
         fetch('http://localhost:3000/profile', {
@@ -47,7 +48,11 @@ const Post = ({ post }) => {
                     {post.author.username === profile.username ? (
                         null
                     ) : (
-                        <button className={styles.subscribeBtn}>Подписаться</button>
+                        <SubscribeButton
+                            currentUser={profile}
+                            setCurrentUser={setProfile}
+                            targetUserId={post.author.id}
+                        />
                     )}
                 </div>
 

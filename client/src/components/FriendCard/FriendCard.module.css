@@ -3,7 +3,6 @@
     height: 260px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 10px;
@@ -13,20 +12,21 @@
 
 .friendProfilePicture {
     width: 165px;
-    height: 165px;
     object-fit: cover;
     aspect-ratio: 1 / 1;
 }
 
 .friendUsername {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
     font-size: 14px;
     color: white;
 }
 
 .addToFriendsBtn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
     font-size: 15px;
     width: 90%;
     gap: 0.3rem;

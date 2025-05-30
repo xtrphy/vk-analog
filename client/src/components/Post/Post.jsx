@@ -2,10 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Post.module.css';
 import SubscribeButton from '../SubcribeButton/SubscribeButton';
+import LikeButton from '../LikeButton/LikeButton';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { useUser } from '../../contexts/UserContext';
 
 const Post = ({ post }) => {
@@ -62,10 +63,12 @@ const Post = ({ post }) => {
 
                 <div className={styles.postInteractions}>
                     <div className={styles.buttonsContainer}>
-                        <button><FontAwesomeIcon icon={faHeart} />
-                            <span>{post._count.likes}</span>
-                        </button>
-                        <button><FontAwesomeIcon icon={faComment} />
+                        <LikeButton
+                            postId={post.id}
+                            initialCount={post._count.likes}
+                        />
+                        <button>
+                            <FontAwesomeIcon icon={faComment} />
                             <span>{post._count.comments}</span>
                         </button>
                     </div>

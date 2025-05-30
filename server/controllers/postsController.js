@@ -42,6 +42,14 @@ const getFeedPosts = async (req, res) => {
                         comments: true,
                     },
                 },
+                likes: {
+                    where: {
+                        userId: userId,
+                    },
+                    select: {
+                        id: true,
+                    },
+                },
                 comments: {
                     orderBy: {
                         createdAt: 'desc',
@@ -63,7 +71,13 @@ const getFeedPosts = async (req, res) => {
             take: 30,
         });
 
-        res.json(feedPosts);
+        const postsWithLikeStatus = feedPosts.map(post => ({
+            ...post,
+            isLiked: post.likes.length > 0,
+            likes: undefined,
+        }));
+
+        res.json(postsWithLikeStatus);
 
     } catch (err) {
         console.error(err);

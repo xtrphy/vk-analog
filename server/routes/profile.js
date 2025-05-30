@@ -26,6 +26,7 @@ router.get('/', async (req, res) => {
                     followee: true,
                 },
             },
+            likes: true,
         },
     });
 

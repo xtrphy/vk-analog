@@ -11,6 +11,9 @@ router.get('/', async (req, res) => {
         where: { id: userId },
         include: {
             posts: {
+                orderBy: {
+                    createdAt: 'desc',
+                },
                 include: {
                     comments: true,
                     likes: true,

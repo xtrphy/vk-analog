@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './Profile.module.css';
 import { useUser } from '../../contexts/UserContext';
 import { Link } from 'react-router-dom';
@@ -11,8 +11,22 @@ import { truncate } from '../../utils/constants';
 
 const Profile = () => {
     const { profile } = useUser();
+    const [userPosts, setUserPosts] = useState([]);
     const subscriptions = profile.following.slice(0, 4);
-    const posts = profile.posts;
+
+    useEffect(() => {
+        fetch('http://localhost:3000/post', {
+            method: 'GET',
+            credentials: 'include',
+        })
+            .then(res => res.json())
+            .then(data => setUserPosts(data))
+            .catch(err => console.error(err));
+    }, []);
+
+    const handlePostCreated = (newPost) => {
+        setUserPosts(prev => [newPost, ...prev]);
+    };
 
     return (
         <>
@@ -35,9 +49,9 @@ const Profile = () => {
 
                 <div className={styles.horizontalContainer}>
                     <div className={styles.profilePosts}>
-                        <CreatePostBtn />
+                        <CreatePostBtn onPostCreated={handlePostCreated} />
 
-                        <ProfilePosts posts={posts} profile={profile} />
+                        <ProfilePosts posts={userPosts} profile={profile} />
 
                     </div>
 

@@ -19,6 +19,7 @@ const getUserProfile = require('./controllers/userPageController');
 const friendsRouter = require('./routes/friends');
 const toggleSubscribeRouter = require('./routes/toggleSubscribe');
 const likesRouter = require('./routes/likes');
+const postRouter = require('./routes/post');
 
 app.use('/', authRouter);
 app.use('/profile', profileRouter);
@@ -27,6 +28,7 @@ app.get('/user/:id', getUserProfile);
 app.use('/friends', friendsRouter);
 app.use('/subscribe', toggleSubscribeRouter);
 app.use('/likes', likesRouter);
+app.use('/post', postRouter);
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`http://localhost:${PORT}`));

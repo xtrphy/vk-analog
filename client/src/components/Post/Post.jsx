@@ -46,9 +46,7 @@ const Post = ({ post }) => {
                         <img className={styles.profilePicture} src={post.author.profilePicture} alt={post.author.username} />
                         <h2 className={styles.authorUsername}>{post.author.username}</h2>
                     </Link>
-                    {post.author.username === profile.username ? (
-                        null
-                    ) : (
+                    {post.author && post.author.username !== profile?.username && (
                         <SubscribeButton
                             currentUser={profile}
                             setCurrentUser={setProfile}

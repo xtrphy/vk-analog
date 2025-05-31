@@ -14,7 +14,12 @@ router.get('/', async (req, res) => {
                 include: {
                     comments: true,
                     likes: true,
-                }
+                    _count: {
+                        select: {
+                            likes: true,
+                        },
+                    },
+                },
             },
             followers: {
                 include: {

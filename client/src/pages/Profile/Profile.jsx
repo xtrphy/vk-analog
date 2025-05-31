@@ -10,7 +10,7 @@ import ProfilePosts from '../../components/ProfilePosts/ProfilePosts';
 import { truncate } from '../../utils/constants';
 
 const Profile = () => {
-    const { profile, setProfile } = useUser();
+    const { profile } = useUser();
     const subscriptions = profile.following.slice(0, 4);
     const posts = profile.posts;
 

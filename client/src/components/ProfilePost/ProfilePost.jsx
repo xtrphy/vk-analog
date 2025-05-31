@@ -1,10 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import LikeButton from '../LikeButton/LikeButton';
 import styles from './ProfilePost.module.css';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 
 const ProfilePost = ({ post, profile }) => {
     const lastComment = post.comments?.[0];
@@ -38,9 +39,10 @@ const ProfilePost = ({ post, profile }) => {
 
                 <div className={styles.postInteractions}>
                     <div className={styles.buttonsContainer}>
-                        <button><FontAwesomeIcon icon={faHeart} />
-                            <span>{post.likes.length}</span>
-                        </button>
+                        <LikeButton
+                            postId={post.id}
+                            initialCount={post._count.likes}
+                        />
                         <button><FontAwesomeIcon icon={faComment} />
                             <span>{post.comments.length}</span>
                         </button>

@@ -1,8 +1,9 @@
 import React from 'react';
 import styles from './UserPost.module.css';
+import LikeButton from '../../../components/LikeButton/LikeButton';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faHeart, faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
 import { useUser } from '../../../contexts/UserContext';
@@ -40,9 +41,10 @@ const UserPost = ({ post, user }) => {
 
                 <div className={styles.postInteractions}>
                     <div className={styles.buttonsContainer}>
-                        <button><FontAwesomeIcon icon={faHeart} />
-                            <span>{post._count.likes}</span>
-                        </button>
+                        <LikeButton
+                            postId={post.id}
+                            initialCount={post._count.likes}
+                        />
                         <button><FontAwesomeIcon icon={faComment} />
                             <span>{post._count.comment}</span>
                         </button>

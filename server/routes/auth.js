@@ -15,8 +15,7 @@ router.get('/auth/github',
 router.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => {
-        const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
-        res.redirect(`${clientUrl}/feed`);
+        res.redirect('https://vkonnekte-app.netlify.app/feed');
     }
 );
 

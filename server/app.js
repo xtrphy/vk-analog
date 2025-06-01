@@ -17,9 +17,15 @@ app.use(cors({
             'https://vkonnekte-app.netlify.app'
         ].filter(Boolean);
 
+        console.log('Request origin:', origin);
+        console.log('CLIENT_URL from env:', process.env.CLIENT_URL);
+        console.log('Allowed origins:', allowedOrigins);
+        console.log('NODE_ENV:', process.env.NODE_ENV);
+
         if (!origin) return callback(null, true);
 
         if (allowedOrigins.indexOf(origin) !== -1) {
+            console.log('CORS allowed for origin:', origin);
             callback(null, true);
         } else {
             console.log('CORS blocked origin:', origin);
@@ -31,6 +37,8 @@ app.use(cors({
     allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
     exposedHeaders: ['Set-Cookie']
 }));
+
+app.options('*', cors());
 
 app.use(
     session({

@@ -17,11 +17,18 @@
     "dependencies": {
         "@faker-js/faker": "^9.8.0",
         "@prisma/client": "^6.8.2",
+        "cloudinary": "^2.6.1",
         "cors": "^2.8.5",
+        "date-fns": "^4.1.0",
         "dotenv": "^16.5.0",
         "express": "^5.1.0",
         "express-session": "^1.18.1",
+        "multer": "^2.0.0",
         "passport": "^0.7.0",
         "passport-github2": "^0.1.12"
+    },
+    "devDependencies": {
+        "concurrently": "^9.1.2",
+        "nodemon": "^3.1.10"
     }
 }

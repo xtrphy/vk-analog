@@ -53,7 +53,7 @@ const Post = ({ post, setPosts }) => {
 
     const handleDeletePost = async (postId) => {
         try {
-            const res = await fetch(`http://localhost:3000/post/${postId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/post/${postId}`, {
                 method: 'DELETE',
                 credentials: 'include',
                 headers: {
@@ -73,7 +73,7 @@ const Post = ({ post, setPosts }) => {
 
     const handleDeleteComment = async (commentId) => {
         try {
-            const res = await fetch(`http://localhost:3000/comments/${commentId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/comments/${commentId}`, {
                 method: 'DELETE',
                 credentials: 'include',
                 headers: {

@@ -11,7 +11,7 @@ const Feed = () => {
     const [posts, setPosts] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/feed/posts', {
+        fetch(`${import.meta.env.VITE_API_URL}/feed/posts`, {
             method: 'GET',
             credentials: 'include',
         })

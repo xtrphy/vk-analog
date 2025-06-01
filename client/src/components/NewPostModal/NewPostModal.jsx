@@ -20,7 +20,7 @@ const NewPostModal = ({ onClose, onPostCreated }) => {
         }
 
         try {
-            const res = await fetch('http://localhost:3000/post', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/post`, {
                 method: 'POST',
                 credentials: 'include',
                 body: formData,

@@ -7,7 +7,7 @@ const PossibleFriends = () => {
     const [users, setUsers] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/feed/suggested-users', {
+        fetch(`${import.meta.env.VITE_API_URL}/feed/suggested-users`, {
             method: 'GET',
             credentials: 'include',
         })

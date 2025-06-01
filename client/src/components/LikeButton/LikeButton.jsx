@@ -11,7 +11,7 @@ const LikeButton = ({ postId, initialCount = 0 }) => {
 
     const fetchLikeStatus = useCallback(async () => {
         try {
-            const response = await fetch(`http://localhost:3000/likes/${postId}`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/likes/${postId}`, {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -38,7 +38,7 @@ const LikeButton = ({ postId, initialCount = 0 }) => {
         setLikesCount(newCount);
 
         try {
-            const response = await fetch(`http://localhost:3000/likes/${postId}/toggle`, {
+            const response = await fetch(`${import.meta.env.VITE_API_URL}/likes/${postId}/toggle`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

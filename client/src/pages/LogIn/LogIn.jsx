@@ -20,7 +20,7 @@ const LogIn = () => {
         <div className={styles.container}>
             <h1>Добро пожаловать в ВКоннекте!</h1>
             <img className={styles.vkLogo} src="vk.png" alt="ВКоннекте" />
-            <button className={styles.logInBtn} onClick={() => window.location.href = 'http://localhost:3000/auth/github'}>
+            <button className={styles.logInBtn} onClick={() => window.location.href = `${import.meta.env.VITE_API_URL}/auth/github`}>
                 <FontAwesomeIcon icon={faGithub} className={styles.githubIcon} />
                 <span className={styles.btnText}>Войти с GitHub</span>
             </button>

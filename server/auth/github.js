@@ -8,18 +8,24 @@ passport.serializeUser((user, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-    const user = await prisma.user.findUnique({ where: { id } });
-    done(null, user);
+    try {
+        const user = await prisma.user.findUnique({ where: { id } });
+        done(null, user);
+    } catch (err) {
+        done(err);
+    }
 });
 
-passport.use(new GitHubStrategy({
+passport.use(new GitHubStrategy(
+    {
     clientID: process.env.GH_CLIENT_ID,
     clientSecret: process.env.GH_CLIENT_SECRET,
-    callbackURL: "http://localhost:3000/auth/github/callback"
+        callbackURL: process.env.GH_CALLBACK_URL || "https://vk-analog.onrender.com/auth/github/callback"
 },
     async (accessToken, refreshToken, profile, done) => {
         try {
             const githubId = profile.id;
+            
             let user = await prisma.user.findUnique({
                 where: { githubId },
             });

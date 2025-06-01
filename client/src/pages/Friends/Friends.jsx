@@ -10,7 +10,7 @@ const Friends = () => {
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:3000/friends', {
+        fetch(`${import.meta.env.VITE_API_URL}/friends`, {
             method: 'GET',
             credentials: 'include',
         })

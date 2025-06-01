@@ -16,7 +16,7 @@ const Profile = () => {
     const subscriptions = profile.following.slice(0, 4);
 
     useEffect(() => {
-        fetch('http://localhost:3000/post', {
+        fetch(`${import.meta.env.VITE_API_URL}/post`, {
             method: 'GET',
             credentials: 'include',
         })

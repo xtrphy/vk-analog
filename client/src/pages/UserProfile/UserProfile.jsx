@@ -35,7 +35,7 @@ const UserProfile = () => {
             setError(null);
 
             try {
-                const response = await fetch(`http://localhost:3000/user/${id}`, {
+                const response = await fetch(`${import.meta.env.VITE_API_URL}/user/${id}`, {
                     method: 'GET',
                     credentials: 'include',
                 });

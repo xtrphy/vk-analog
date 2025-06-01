@@ -8,7 +8,7 @@ export const UserProvider = ({ children }) => {
 
     const fetchProfile = async () => {
         try {
-            const res = await fetch('http://localhost:3000/profile', {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
                 credentials: 'include',
             });
             if (res.ok) {

@@ -8,7 +8,7 @@ const CommentInput = ({ user, postId, setComments, onSubmit }) => {
 
     const fetchComments = useCallback(async () => {
         try {
-            const res = await fetch(`http://localhost:3000/comments/${postId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/comments/${postId}`, {
                 method: 'GET',
                 credentials: 'include',
             });
@@ -30,7 +30,7 @@ const CommentInput = ({ user, postId, setComments, onSubmit }) => {
         if (!commentContent.trim()) return;
 
         try {
-            const res = await fetch(`http://localhost:3000/comments/${postId}`, {
+            const res = await fetch(`${import.meta.env.VITE_API_URL}/comments/${postId}`, {
                 method: 'POST',
                 credentials: 'include',
                 headers: {

@@ -28,6 +28,8 @@ const Profile = () => {
         setUserPosts(prev => [newPost, ...prev]);
     };
 
+    console.log(userPosts);
+
     return (
         <>
             <Header />

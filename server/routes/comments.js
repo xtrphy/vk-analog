@@ -68,4 +68,42 @@ router.post('/:postId', isAuth, async (req, res) => {
     }
 });
 
+router.delete('/:commentId', isAuth, async (req, res) => {
+    const { commentId } = req.params;
+    const userId = req.user.id;
+
+    try {
+        const comment = await prisma.comment.findUnique({
+            where: { id: commentId },
+            select: {
+                id: true,
+                authorId: true,
+                postId: true,
+            },
+        });
+
+        if (!comment) {
+            return res.status(404).json({ message: 'Comment not found' });
+        }
+
+        if (comment.authorId !== userId) {
+            return res.status(403).json({ message: 'You can only delete your own comments' });
+        }
+
+        const deletedComment = await prisma.comment.delete({
+            where: { id: commentId },
+            select: {
+                id: true,
+                postId: true,
+            },
+        });
+
+        res.json({ message: 'Comment deleted successfully', deletedComment });
+
+    } catch (err) {
+        console.error('Error deleting comment', err);
+        res.status(500).json({ message: 'Failed to delete comment' });
+    }
+});
+
 module.exports = router;

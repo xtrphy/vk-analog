@@ -11,6 +11,7 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ProfilePost = ({ post, setUserPosts, profile }) => {
+    console.log(post);
     const [comments, setComments] = useState(post.comments);
     const [isWritingComment, setIsWritingComment] = useState(false);
     const commentInputRef = useRef(null);
@@ -69,6 +70,26 @@ const ProfilePost = ({ post, setUserPosts, profile }) => {
         }
     };
 
+    const handleDeleteComment = async (commentId) => {
+        try {
+            const res = await fetch(`http://localhost:3000/comments/${commentId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                const deletedComment = data.deletedComment;
+                setComments(prev => prev.filter(comment => comment.id !== deletedComment.id));
+            }
+        } catch (err) {
+            console.error('Error deleting comment', err);
+        }
+    };
+
     return (
         <div className={styles.post}>
 
@@ -78,11 +99,9 @@ const ProfilePost = ({ post, setUserPosts, profile }) => {
                         <img className={styles.profilePicture} src={profile.profilePicture} alt={profile.username} />
                         <h2 className={styles.authorUsername}>{profile.username}</h2>
                     </Link>
-                    <div className={styles.deletePostContainer}>
-                        <button onClick={() => deletePost(post.id)}>
-                            <FontAwesomeIcon icon={faTrash} style={{ color: 'red', }} />
-                        </button>
-                    </div>
+                    <button onClick={() => deletePost(post.id)}>
+                        <FontAwesomeIcon icon={faTrash} style={{ color: 'gray' }} />
+                    </button>
                 </div>
 
                 <div className={styles.postContentContainer}>
@@ -117,13 +136,20 @@ const ProfilePost = ({ post, setUserPosts, profile }) => {
             {lastComment && lastComment.author && (
                 <>
                     <div className={styles.postComment}>
-                        <div className={styles.commentAuthorContainer}>
-                            <img className={styles.commentAuthor} src={lastComment.author.profilePicture} alt={lastComment.author.username} />
+                        <div className={styles.leftSide}>
+                            <div className={styles.commentAuthorContainer}>
+                                <img className={styles.commentAuthor} src={lastComment.author.profilePicture} alt={lastComment.author.username} />
+                            </div>
+                            <div className={styles.commentInfo}>
+                                <h3 className={styles.commentAuthorUsername}>{lastComment.author.username}</h3>
+                                <p className={styles.commentContent}>{lastComment.content}</p>
+                                <span className={styles.commentCreatedAt}>{formattedCommentTime}</span>
+                            </div>
                         </div>
-                        <div className={styles.commentInfo}>
-                            <h3 className={styles.commentAuthorUsername}>{lastComment.author.username}</h3>
-                            <p className={styles.commentContent}>{lastComment.content}</p>
-                            <span className={styles.commentCreatedAt}>{formattedCommentTime}</span>
+                        <div className={styles.rightSide}>
+                            <button onClick={() => handleDeleteComment(lastComment.id)}>
+                                <FontAwesomeIcon icon={faTrash} style={{ color: 'gray' }} />
+                            </button>
                         </div>
                     </div>
                 </>

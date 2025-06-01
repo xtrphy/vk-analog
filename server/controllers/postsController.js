@@ -56,6 +56,7 @@ const getFeedPosts = async (req, res) => {
                     },
                     take: 1,
                     select: {
+                        id: true,
                         content: true,
                         createdAt: true,
                         author: {

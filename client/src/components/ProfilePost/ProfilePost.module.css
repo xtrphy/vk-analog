@@ -89,8 +89,13 @@
     padding: 0.35rem 1.25rem 0.35rem 1.25rem;
     display: flex;
     align-items: flex-start;
-    gap: 0.5rem;
+    justify-content: space-between;
     margin-bottom: 10px;
+}
+
+.leftSide {
+    display: flex;
+    gap: 0.5rem;
 }
 
 .postComment:hover {

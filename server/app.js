@@ -10,9 +10,11 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL,
+    origin: 'https://vkonnekte-app.netlify.app',
     credentials: true,
 }));
+
+app.set('trust proxy', 1);
 
 app.use(
     session({

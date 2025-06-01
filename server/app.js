@@ -4,6 +4,7 @@ const session = require('express-session');
 const prisma = require('./prisma/client');
 const PrismaSessionStore = require('./utils/PrismaSessionStore');
 require('./auth/github');
+const sessionStore = new PrismaSessionStore();
 const cors = require('cors');
 
 const app = express();
@@ -19,13 +20,13 @@ app.use(
         secret: process.env.SESSION_SECRET,
         resave: false,
         saveUninitialized: false,
+        store: sessionStore,
         cookie: {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24,
             sameSite: 'lax',
             secure: process.env.NODE_ENV === 'production',
-        },
-        store: PrismaSessionStore(prisma),
+        }
     })
 );
 

@@ -25,7 +25,7 @@ router.get('/:postId', isAuth, async (req, res) => {
             count: likesCount,
             isLiked: userLike,
         });
-    } catch(err) {
+    } catch (err) {
         console.error('Error fetching likes', err);
         res.status(500).json({ message: 'Database error' });
     }

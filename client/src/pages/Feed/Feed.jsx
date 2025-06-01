@@ -36,7 +36,7 @@ const Feed = () => {
 
                 <CreatePostBtn onPostCreated={handlePostCreated} />
 
-                <Posts posts={posts} />
+                <Posts posts={posts} setPosts={setPosts} />
 
             </Container>
         </>

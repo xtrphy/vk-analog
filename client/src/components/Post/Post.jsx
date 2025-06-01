@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Post.module.css';
 import SubscribeButton from '../SubcribeButton/SubscribeButton';
@@ -6,24 +6,34 @@ import LikeButton from '../LikeButton/LikeButton';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { formatDistanceToNow } from 'date-fns';
 import { ru } from 'date-fns/locale';
-import { faComment, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
+import { faComment } from '@fortawesome/free-regular-svg-icons';
+import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { useUser } from '../../contexts/UserContext';
+import CommentInput from '../CommentInput/CommentInput';
 
-const Post = ({ post }) => {
-    const [user, setUser] = useState([]);
+const Post = ({ post, setPosts }) => {
+    const [comments, setComments] = useState(post.comments);
+    const [isWritingComment, setIsWritingComment] = useState(false);
     const { profile, setProfile } = useUser();
+    const commentInputRef = useRef(null);
 
     useEffect(() => {
-        fetch('http://localhost:3000/profile', {
-            method: 'GET',
-            credentials: 'include',
-        })
-            .then(res => res.json())
-            .then(data => setUser(data))
-            .catch(err => console.error(err))
-    }, []);
+        const handleClickOutside = (e) => {
+            if (commentInputRef.current && !commentInputRef.current.contains(e.target)) {
+                setIsWritingComment(false);
+            }
+        };
 
-    const lastComment = post.comments?.[0];
+        if (isWritingComment) {
+            document.addEventListener('mousedown', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+        };
+    }, [isWritingComment]);
+
+    const lastComment = comments?.[0];
 
     let formattedCommentTime = '';
     if (lastComment?.createdAt) {
@@ -37,6 +47,30 @@ const Post = ({ post }) => {
     const postDate = post.createdAt;
     const timeAgo = formatDistanceToNow(postDate, { addSuffix: true, locale: ru });
 
+    const handleCommentSubmit = () => {
+        setIsWritingComment(false);
+    };
+
+    const deletePost = async (postId) => {
+        try {
+            const res = await fetch(`http://localhost:3000/post/${postId}`, {
+                method: 'DELETE',
+                credentials: 'include',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            if (res.ok) {
+                const data = await res.json();
+                const deletedPost = data.deletedPost;
+                setPosts(prev => prev.filter(post => post.id !== deletedPost.id));
+            }
+        } catch (err) {
+            console.error('Error deleting post', err);
+        }
+    };
+
     return (
         <div className={styles.post}>
 
@@ -46,6 +80,13 @@ const Post = ({ post }) => {
                         <img className={styles.profilePicture} src={post.author.profilePicture} alt={post.author.username} />
                         <h2 className={styles.authorUsername}>{post.author.username}</h2>
                     </Link>
+                    {post.author.username === profile.username && (
+                        <div className={styles.deletePostContainer}>
+                            <button onClick={() => deletePost(post.id)}>
+                                <FontAwesomeIcon icon={faTrash} style={{ color: 'red', }} />
+                            </button>
+                        </div>
+                    )}
                     {post.author && post.author.username !== profile?.username && (
                         <SubscribeButton
                             currentUser={profile}
@@ -65,16 +106,26 @@ const Post = ({ post }) => {
                             postId={post.id}
                             initialCount={post._count.likes}
                         />
-                        <button>
+                        <button onClick={() => setIsWritingComment(true)}>
                             <FontAwesomeIcon icon={faComment} />
-                            <span>{post._count.comments}</span>
+                            <span>{comments?.length || 0}</span>
                         </button>
                     </div>
                     <span className={styles.timeAgoPost}>{timeAgo}</span>
                 </div>
+                {isWritingComment && profile && (
+                    <div ref={commentInputRef}>
+                        <CommentInput
+                            user={profile}
+                            setComments={setComments}
+                            postId={post.id}
+                            onSubmit={handleCommentSubmit}
+                        />
+                    </div>
+                )}
                 <div className={styles.line}></div>
             </div>
-            {lastComment ? (
+            {lastComment && lastComment.author && (
                 <>
                     <div className={styles.postComment}>
                         <div className={styles.commentAuthorContainer}>
@@ -86,23 +137,8 @@ const Post = ({ post }) => {
                             <span className={styles.commentCreatedAt}>{formattedCommentTime}</span>
                         </div>
                     </div>
-
-                    <div className={styles.commentInputFieldContainer}>
-                        <img className={styles.userProfilePicture} src={user.profilePicture} alt={user.username} />
-                        <input
-                            className={styles.commentInput}
-                            type="text"
-                            placeholder='Написать комментарий...'
-                        />
-                        <button>
-                            <FontAwesomeIcon icon={faPaperPlane} />
-                        </button>
-                    </div>
                 </>
-            ) : (
-                null
             )}
-
         </div>
     );
 };

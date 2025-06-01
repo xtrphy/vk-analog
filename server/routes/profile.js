@@ -1,8 +1,9 @@
 const express = require('express');
 const router = express.Router();
+const isAuth = require('../middlewares/isAuth');
 const prisma = require('../prisma/client');
 
-router.get('/', async (req, res) => {
+router.get('/', isAuth, async (req, res) => {
     if (!req.isAuthenticated()) return;
 
     const userId = req.user.id;
@@ -41,7 +42,7 @@ router.get('/', async (req, res) => {
     res.json(user);
 });
 
-router.patch('/edit', async (req, res) => {
+router.patch('/edit', isAuth, async (req, res) => {
     const { bio, profilePicture } = req.body;
     const userId = req.user.id;
 

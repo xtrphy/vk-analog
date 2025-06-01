@@ -51,7 +51,7 @@ const Profile = () => {
                     <div className={styles.profilePosts}>
                         <CreatePostBtn onPostCreated={handlePostCreated} />
 
-                        <ProfilePosts posts={userPosts} profile={profile} />
+                        <ProfilePosts posts={userPosts} setUserPosts={setUserPosts} profile={profile} />
 
                     </div>
 

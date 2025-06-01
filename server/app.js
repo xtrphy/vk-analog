@@ -19,6 +19,7 @@ const getUserProfile = require('./controllers/userPageController');
 const friendsRouter = require('./routes/friends');
 const toggleSubscribeRouter = require('./routes/toggleSubscribe');
 const likesRouter = require('./routes/likes');
+const commentsRouter = require('./routes/comments');
 const postRouter = require('./routes/post');
 
 app.use('/', authRouter);
@@ -28,6 +29,7 @@ app.get('/user/:id', getUserProfile);
 app.use('/friends', friendsRouter);
 app.use('/subscribe', toggleSubscribeRouter);
 app.use('/likes', likesRouter);
+app.use('/comments', commentsRouter);
 app.use('/post', postRouter);
 
 const PORT = process.env.PORT || 3000;

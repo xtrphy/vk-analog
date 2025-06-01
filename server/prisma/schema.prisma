@@ -32,7 +32,7 @@ model Post {
     id        String    @id @default(cuid())
     content   String
     createdAt DateTime  @default(now())
-    author    User      @relation(fields: [authorId], references: [id])
+    author    User      @relation(fields: [authorId], references: [id], onDelete: Cascade)
     authorId  String
     comments  Comment[]
     likes     Like[]
@@ -42,17 +42,17 @@ model Comment {
     id        String   @id @default(cuid())
     content   String
     createdAt DateTime @default(now())
-    author    User     @relation(fields: [authorId], references: [id])
+    author    User     @relation(fields: [authorId], references: [id], onDelete: Cascade)
     authorId  String
-    post      Post     @relation(fields: [postId], references: [id])
+    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
     postId    String
 }
 
 model Like {
     id        String   @id @default(cuid())
-    user      User     @relation(fields: [userId], references: [id])
+    user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
     userId    String
-    post      Post     @relation(fields: [postId], references: [id])
+    post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
     postId    String
     createdAt DateTime @default(now())
 

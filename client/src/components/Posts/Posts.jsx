@@ -3,11 +3,11 @@ import styles from './Posts.module.css';
 import Post from '../Post/Post';
 import { Link } from 'react-router-dom';
 
-const Posts = ({ posts }) => {
+const Posts = ({ posts, setPosts }) => {
     return posts.length > 0 ? (
         <div className={styles.postsContainer}>
             {posts.map(post => (
-                <Post key={post.id} post={post} />
+                <Post key={post.id} post={post} setPosts={setPosts} />
             ))}
         </div>
     ) : (

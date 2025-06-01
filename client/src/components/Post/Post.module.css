@@ -124,35 +124,3 @@
     font-size: 0.825rem;
     color: #777;
 }
-
-.commentInputFieldContainer {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.3rem 1.25rem 0rem 1.25rem;
-}
-
-.userProfilePicture {
-    width: 28px;
-    border-radius: 50%;
-    object-fit: cover;
-    aspect-ratio: 1 / 1;
-}
-
-.commentInput {
-    padding: 0.5rem 0.8rem;
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    border-radius: 6px;
-    width: 100%;
-    font-size: 0.8rem;
-    font-weight: 300;
-}
-
-.commentInput:focus::placeholder {
-    color: transparent;
-}
-
-.commentInput::placeholder {
-    font-size: 0.8rem;
-}

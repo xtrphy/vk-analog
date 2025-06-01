@@ -15,7 +15,8 @@ router.get('/auth/github',
 router.get('/auth/github/callback',
     passport.authenticate('github', { failureRedirect: '/' }),
     (req, res) => {
-        res.redirect(process.env.CLIENT_URL || 'http://localhost:5173/feed');
+        const clientUrl = process.env.CLIENT_URL || 'http://localhost:5173';
+        res.redirect(`${clientUrl}/feed`);
     }
 );
 

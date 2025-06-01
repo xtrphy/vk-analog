@@ -41,7 +41,7 @@ class PrismaSessionStore extends session.Store {
 
     async destroy(sid, callback) {
         try {
-            await prisma.session.delete({ where: { sid } });
+            await prisma.session.deleteMany({ where: { sid } });
             callback(null);
         } catch (err) {
             callback(err);

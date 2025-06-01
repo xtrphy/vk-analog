@@ -1,5 +1,8 @@
 require('dotenv').config();
 const express = require('express');
+const session = require('express-session');
+const prisma = require('./prisma/client');
+const PrismaSessionStore = require('./utils/PrismaSessionStore');
 require('./auth/github');
 const cors = require('cors');
 
@@ -9,6 +12,22 @@ app.use(cors({
     origin: process.env.CLIENT_URL || 'http://localhost:5173',
     credentials: true,
 }));
+
+app.use(
+    session({
+        name: 'sid',
+        secret: process.env.SESSION_SECRET,
+        resave: false,
+        saveUninitialized: false,
+        cookie: {
+            httpOnly: true,
+            maxAge: 1000 * 60 * 60 * 24,
+            sameSite: 'lax',
+            secure: process.env.NODE_ENV === 'production',
+        },
+        store: PrismaSessionStore(prisma),
+    })
+);
 
 app.use(express.json());
 

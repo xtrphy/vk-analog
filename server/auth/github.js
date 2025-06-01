@@ -18,14 +18,14 @@ passport.deserializeUser(async (id, done) => {
 
 passport.use(new GitHubStrategy(
     {
-    clientID: process.env.GH_CLIENT_ID,
-    clientSecret: process.env.GH_CLIENT_SECRET,
+        clientID: process.env.GH_CLIENT_ID,
+        clientSecret: process.env.GH_CLIENT_SECRET,
         callbackURL: process.env.GH_CALLBACK_URL || "https://vk-analog.onrender.com/auth/github/callback"
-},
+    },
     async (accessToken, refreshToken, profile, done) => {
         try {
             const githubId = profile.id;
-            
+
             let user = await prisma.user.findUnique({
                 where: { githubId },
             });

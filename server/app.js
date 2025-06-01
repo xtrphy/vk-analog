@@ -10,8 +10,26 @@ const cors = require('cors');
 const app = express();
 
 app.use(cors({
-    origin: process.env.CLIENT_URL || 'http://localhost:5173',
+    origin: function (origin, callback) {
+        const allowedOrigins = [
+            process.env.CLIENT_URL,
+            'http://localhost:5173',
+            'https://vkonnekte-app.netlify.app'
+        ].filter(Boolean);
+
+        if (!origin) return callback(null, true);
+
+        if (allowedOrigins.indexOf(origin) !== -1) {
+            callback(null, true);
+        } else {
+            console.log('CORS blocked origin:', origin);
+            callback(new Error('Not allowed by CORS'));
+        }
+    },
     credentials: true,
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Accept'],
+    exposedHeaders: ['Set-Cookie']
 }));
 
 app.use(
@@ -24,8 +42,9 @@ app.use(
         cookie: {
             httpOnly: true,
             maxAge: 1000 * 60 * 60 * 24,
-            sameSite: 'lax',
+            sameSite: process.env.NODE_ENV === 'production' ? 'none' : 'lax',
             secure: process.env.NODE_ENV === 'production',
+            domain: process.env.NODE_ENV === 'production' ? undefined : undefined
         }
     })
 );

@@ -16,11 +16,17 @@ const LogIn = () => {
         }
     }, [profile, navigate]);
 
+    const handleGitHubLogin = () => {
+        const apiUrl = import.meta.env.VITE_API_URL || 'https://vk-analog.onrender.com';
+        console.log('Redirecting to:', `${apiUrl}/auth/github`);
+        window.location.href = `${apiUrl}/auth/github`;
+    };
+
     return (
         <div className={styles.container}>
             <h1>Добро пожаловать в ВКоннекте!</h1>
             <img className={styles.vkLogo} src="vk.png" alt="ВКоннекте" />
-            <button className={styles.logInBtn} onClick={() => window.location.href = `${import.meta.env.VITE_API_URL}/auth/github`}>
+            <button className={styles.logInBtn} onClick={handleGitHubLogin}>
                 <FontAwesomeIcon icon={faGithub} className={styles.githubIcon} />
                 <span className={styles.btnText}>Войти с GitHub</span>
             </button>

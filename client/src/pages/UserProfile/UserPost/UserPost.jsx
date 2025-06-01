@@ -71,6 +71,8 @@ const UserPost = ({ post, user }) => {
         }
     };
 
+    console.log(lastComment);
+
     return (
         <div className={styles.post}>
 
@@ -131,9 +133,11 @@ const UserPost = ({ post, user }) => {
                             </div>
                         </div>
                         <div className={styles.rightSide}>
-                            <button onClick={() => handleDeleteComment(lastComment.id)}>
-                                <FontAwesomeIcon icon={faTrash} style={{ color: 'gray' }} />
-                            </button>
+                            {lastComment.authorId === profile.id && (
+                                <button onClick={() => handleDeleteComment(lastComment.id)}>
+                                    <FontAwesomeIcon icon={faTrash} style={{ color: 'gray' }} />
+                                </button>
+                            )}
                         </div>
                     </div>
                 </>

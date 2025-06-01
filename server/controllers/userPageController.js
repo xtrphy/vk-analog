@@ -47,7 +47,9 @@ const getUserProfile = async (req, res) => {
                         },
                         comments: {
                             select: {
+                                id: true,
                                 author: true,
+                                authorId: true,
                                 content: true,
                                 createdAt: true,
                             }

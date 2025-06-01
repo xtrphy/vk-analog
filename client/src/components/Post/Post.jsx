@@ -116,6 +116,12 @@ const Post = ({ post, setPosts }) => {
                     )}
                 </div>
 
+                {post.imageUrl && (
+                    <div className={styles.postImageContainer}>
+                        <img className={styles.postImage} src={post.imageUrl} alt='' />
+                    </div>
+                )}
+
                 <div className={styles.postContentContainer}>
                     <p className={styles.postContent}>{post.content}</p>
                 </div>

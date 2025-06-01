@@ -38,6 +38,7 @@ const getUserProfile = async (req, res) => {
                         id: true,
                         content: true,
                         createdAt: true,
+                        imageUrl: true,
                         _count: {
                             select: {
                                 likes: true,

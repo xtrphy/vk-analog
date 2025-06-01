@@ -11,7 +11,6 @@ import { faComment } from '@fortawesome/free-regular-svg-icons';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 
 const ProfilePost = ({ post, setUserPosts, profile }) => {
-    console.log(post);
     const [comments, setComments] = useState(post.comments);
     const [isWritingComment, setIsWritingComment] = useState(false);
     const commentInputRef = useRef(null);
@@ -50,7 +49,7 @@ const ProfilePost = ({ post, setUserPosts, profile }) => {
         setIsWritingComment(false);
     };
 
-    const deletePost = async (postId) => {
+    const handleDeletePost = async (postId) => {
         try {
             const res = await fetch(`http://localhost:3000/post/${postId}`, {
                 method: 'DELETE',
@@ -99,10 +98,16 @@ const ProfilePost = ({ post, setUserPosts, profile }) => {
                         <img className={styles.profilePicture} src={profile.profilePicture} alt={profile.username} />
                         <h2 className={styles.authorUsername}>{profile.username}</h2>
                     </Link>
-                    <button onClick={() => deletePost(post.id)}>
+                    <button onClick={() => handleDeletePost(post.id)}>
                         <FontAwesomeIcon icon={faTrash} style={{ color: 'gray' }} />
                     </button>
                 </div>
+
+                {post.imageUrl && (
+                    <div className={styles.postImageContainer}>
+                        <img className={styles.postImage} src={post.imageUrl} alt='' />
+                    </div>
+                )}
 
                 <div className={styles.postContentContainer}>
                     <p className={styles.postContent}>{post.content}</p>

@@ -8,7 +8,6 @@ import FriendCard from '../../components/FriendCard/FriendCard';
 
 const Friends = () => {
     const [friends, setFriends] = useState([]);
-    const [suggestedFriends, setSuggestedFriends] = useState([]);
 
     useEffect(() => {
         fetch('http://localhost:3000/friends', {
@@ -27,10 +26,10 @@ const Friends = () => {
             <SideBar />
             <div className={styles.container}>
                 <div className={styles.friendsContainer}>
-                    <h1 style={{ fontWeight: '600'}}>Возможно, вы знакомы</h1>
+                    <h1 style={{ fontWeight: '600' }}>Возможно, вы знакомы</h1>
                     <div className={styles.friendsGrid}>
                         {friends.map(friend => (
-                            <FriendCard id={friend.id} username={friend.username} profilePicture={friend.profilePicture} />
+                            <FriendCard key={friend.id} id={friend.id} username={friend.username} profilePicture={friend.profilePicture} />
                         ))}
                     </div>
                 </div>

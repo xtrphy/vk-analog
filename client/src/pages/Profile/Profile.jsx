@@ -12,6 +12,7 @@ import { truncate } from '../../utils/constants';
 const Profile = () => {
     const { profile } = useUser();
     const [userPosts, setUserPosts] = useState([]);
+    const subscriptionsQuantity = profile.following.length;
     const subscriptions = profile.following.slice(0, 4);
 
     useEffect(() => {
@@ -27,8 +28,6 @@ const Profile = () => {
     const handlePostCreated = (newPost) => {
         setUserPosts(prev => [newPost, ...prev]);
     };
-
-    console.log(userPosts);
 
     return (
         <>
@@ -58,7 +57,7 @@ const Profile = () => {
                     </div>
 
                     <div className={styles.subscriptionsContainer}>
-                        <h2 className={styles.subscriptionsTitle}>Подписки <span className={styles.subscriptionsQuantity}>{subscriptions.length}</span></h2>
+                        <h2 className={styles.subscriptionsTitle}>Подписки <span className={styles.subscriptionsQuantity}>{subscriptionsQuantity}</span></h2>
                         <div className={styles.subscriptions}>
                             {subscriptions.length > 0 ? (
                                 <ul className={styles.followingList}>
@@ -72,7 +71,9 @@ const Profile = () => {
                                     ))}
                                 </ul>
                             ) : (
-                                null
+                                <span className={styles.noSubscriptions}>
+                                    У пользователя нет подписок
+                                </span>
                             )}
                         </div>
                     </div>

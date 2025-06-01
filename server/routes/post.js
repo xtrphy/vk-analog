@@ -1,64 +1,83 @@
 const express = require('express');
 const prisma = require('../prisma/client');
 const isAuth = require('../middlewares/isAuth');
-const router = express.Router();
 
-router.post('/', isAuth, async (req, res) => {
+const multer = require('multer');
+const cloudinary = require('../utils/cloudinary');
+
+const router = express.Router();
+const upload = multer({ dest: 'uploads/' });
+
+router.post('/', upload.single('image'), isAuth, async (req, res) => {
     const { content } = req.body;
     const userId = req.user.id;
+    let imageUrl = null;
 
     if (!content || !userId) {
         return res.status(400).json({ message: 'Invalid request' });
     }
 
-    const post = await prisma.post.create({
-        data: {
-            content,
-            authorId: userId,
-        },
-        include: {
-            author: {
-                select: {
-                    id: true,
-                    username: true,
-                    profilePicture: true,
-                },
+    try {
+        if (req.file) {
+            const result = await cloudinary.uploader.upload(req.file.path, {
+                folder: 'posts',
+            });
+            imageUrl = result.secure_url;
+        }
+
+        const post = await prisma.post.create({
+            data: {
+                content,
+                imageUrl,
+                authorId: userId,
             },
-            _count: {
-                select: {
-                    likes: true,
-                    comments: true,
+            include: {
+                author: {
+                    select: {
+                        id: true,
+                        username: true,
+                        profilePicture: true,
+                    },
                 },
-            },
-            likes: {
-                where: {
-                    userId: userId,
+                _count: {
+                    select: {
+                        likes: true,
+                        comments: true,
+                    },
                 },
-                select: {
-                    id: true,
+                likes: {
+                    where: {
+                        userId: userId,
+                    },
+                    select: {
+                        id: true,
+                    },
                 },
-            },
-            comments: {
-                orderBy: {
-                    createdAt: 'desc',
-                },
-                take: 1,
-                select: {
-                    content: true,
-                    createdAt: true,
-                    author: {
-                        select: {
-                            id: true,
-                            username: true,
-                            profilePicture: true,
+                comments: {
+                    orderBy: {
+                        createdAt: 'desc',
+                    },
+                    take: 1,
+                    select: {
+                        content: true,
+                        createdAt: true,
+                        author: {
+                            select: {
+                                id: true,
+                                username: true,
+                                profilePicture: true,
+                            },
                         },
                     },
                 },
             },
-        },
-    });
+        });
 
-    res.json(post);
+        res.json(post);
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ message: 'Error creating post' });
+    }
 });
 
 router.get('/', isAuth, async (req, res) => {

@@ -159,3 +159,8 @@
 .followeeUsername {
     font-size: 12px;
 }
+
+.noSubscriptions {
+    font-size: 13px;
+    color: #ccc;
+}

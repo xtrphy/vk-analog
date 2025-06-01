@@ -11,6 +11,13 @@ export const UserProvider = ({ children }) => {
             const res = await fetch(`${import.meta.env.VITE_API_URL}/profile`, {
                 credentials: 'include',
             });
+
+            if (res.status === 401) {
+                console.log('Unauthorized');
+                setProfile(null);
+                return;
+            }
+
             if (res.ok) {
                 const data = await res.json();
                 setProfile(data);

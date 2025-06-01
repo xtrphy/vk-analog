@@ -45,7 +45,6 @@ const UserProfile = () => {
                 }
 
                 const data = await response.json();
-                console.log(data.posts);
                 setUser(data);
                 setPosts(data.posts || []);
                 setSubscriptions(data.following || []);

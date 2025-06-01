@@ -71,8 +71,6 @@ const UserPost = ({ post, user }) => {
         }
     };
 
-    console.log(lastComment);
-
     return (
         <div className={styles.post}>
 

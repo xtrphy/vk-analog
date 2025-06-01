@@ -18,7 +18,6 @@ const LogIn = () => {
 
     const handleGitHubLogin = () => {
         const apiUrl = import.meta.env.VITE_API_URL || 'https://vk-analog.onrender.com';
-        console.log('Redirecting to:', `${apiUrl}/auth/github`);
         window.location.href = `${apiUrl}/auth/github`;
     };
 

@@ -24,7 +24,6 @@ const getSuggestedFriends = async (req, res) => {
                     notIn: Array.from(connectedIds),
                 },
             },
-            take: 9,
             select: {
                 id: true,
                 username: true,

@@ -9,7 +9,7 @@ async function main() {
     await prisma.user.deleteMany();
 
     const users = [];
-    for (let i = 0; i < 10; i++) {
+    for (let i = 0; i < 8; i++) {
         const user = await prisma.user.create({
             data: {
                 email: faker.internet.email(),
@@ -22,7 +22,7 @@ async function main() {
     }
 
     for (const user of users) {
-        const postCount = faker.number.int({ min: 1, max: 3 });
+        const postCount = faker.number.int({ min: 1, max: 5 });
         for (let i = 0; i < postCount; i++) {
             await prisma.post.create({
                 data: {

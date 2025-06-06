@@ -1,4 +1,4 @@
-# VKonnekte - VKontakte Close (Fullstack Social Network)
+# VKonnekte - VKontakte Clone (Fullstack Social Network)
 
 A fullstack VKontakte clone built with modern technologies. Users can create posts, like, comment, subscribe to others, and manage their profiles (including avatar and bio). Authentication is implemented via GitHub OAuth.
 

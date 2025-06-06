@@ -24,7 +24,7 @@ A fullstack VKontakte clone built with modern technologies. Users can create pos
 
 ## 🛠️ Tech Stack
 
-- **Frontend:** React, Tailwind CSS
+- **Frontend:** React
 - **Backend:** Node.js, Express, Prisma
 - **Database:** PostgreSQL
 - **Authentication:** GitHub OAuth

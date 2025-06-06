@@ -6,11 +6,14 @@ A fullstack VKontakte clone built with modern technologies. Users can create pos
 
 ## Screenshots
 
-![Feed page](https://github.com/user-attachments/assets/a3b873d8-74d4-44e3-a4cd-00efc30475f6)
+#### Feed page
+![Feed page screenshot](https://github.com/user-attachments/assets/a3b873d8-74d4-44e3-a4cd-00efc30475f6)
 
-![Authors page](https://github.com/user-attachments/assets/b0a9a2e2-be97-43e9-a0b5-b8b9e3010f4e)
+#### Authors page
+![Authors page screenshot](https://github.com/user-attachments/assets/b0a9a2e2-be97-43e9-a0b5-b8b9e3010f4e)
 
-![Profile page](https://github.com/user-attachments/assets/5ac59f7d-93a9-4295-8633-4098b8f3433f)
+#### Profile page
+![Profile page screenshot](https://github.com/user-attachments/assets/5ac59f7d-93a9-4295-8633-4098b8f3433f)
 
 ## Functional
 
